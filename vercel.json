@@ -1,0 +1,5 @@
+{
+  "installCommand": "npm install && chmod +x node_modules/.bin/nuxt",
+  "buildCommand": "npm run build",
+  "framework": "nuxt"
+}
