@@ -582,7 +582,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-CKiC0A-7.mjs')
+    component: () => import('./index-D-m9Uy3C.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -1252,8 +1252,8 @@ const _sfc_main$1 = {
     const statusText = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-59PMLNnR.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-BGBfgC6o.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-Bp6cPnAx.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-vn3UfUc8.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ status: unref(status), statusText: unref(statusText), statusCode: unref(status), statusMessage: unref(statusText), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));

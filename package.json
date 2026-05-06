@@ -1,5 +1,5 @@
 {
-  "name": "trufa-app",
+  "name": "meu-portfolio",
   "type": "module",
   "private": true,
   "scripts": {
@@ -10,15 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxtjs/supabase": "^2.0.6",
-    "@nuxtjs/tailwindcss": "^6.14.0",
-    "@pinia/nuxt": "^0.11.3",
-    "jspdf": "^4.2.1",
-    "jspdf-autotable": "^5.0.7",
     "nuxt": "^4.4.4",
-    "pinia": "^3.0.4",
     "vue": "^3.5.33",
-    "vue-router": "^5.0.6",
-    "xlsx": "^0.18.5"
+    "vue-router": "^5.0.6"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.14.0"
   }
 }

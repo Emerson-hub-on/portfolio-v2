@@ -1,7 +1,7 @@
 import { ref, unref, mergeProps, createVNode, resolveDynamicComponent, computed, useSSRContext } from 'vue';
 import { ssrRenderClass, ssrRenderComponent, ssrRenderAttrs, ssrRenderStyle, ssrRenderList, ssrInterpolate, ssrRenderAttr, ssrRenderVNode } from 'vue/server-renderer';
 import { _ as _export_sfc } from './server.mjs';
-import { u as useSeoMeta } from './composables-DQb260gL.mjs';
+import { u as useSeoMeta } from './composables-pz26RD25.mjs';
 import '../_/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -363,22 +363,22 @@ const _sfc_main = {
       const _component_SectionContato = _sfc_main$1;
       _push(`<!--[-->`);
       if (unref(showIntro)) {
-        _push(`<div class="${ssrRenderClass([{ "revealing": unref(revealing) }, "intro-screen"])}" data-v-77252161><div class="intro-bg" data-v-77252161><div class="grid-overlay" data-v-77252161></div><div class="blob blob-purple" data-v-77252161></div><div class="blob blob-cyan" data-v-77252161></div></div><div class="${ssrRenderClass([{ "fade-out": unref(revealing) }, "intro-content"])}" data-v-77252161><div class="avatar-wrapper" data-v-77252161><div class="avatar-ring" data-v-77252161></div><div class="avatar-ring ring-2" data-v-77252161></div><div class="avatar" data-v-77252161><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="avatar-icon" data-v-77252161><circle cx="40" cy="30" r="16" fill="#7c6aff" opacity="0.9" data-v-77252161></circle><ellipse cx="40" cy="68" rx="26" ry="16" fill="#7c6aff" opacity="0.6" data-v-77252161></ellipse></svg></div><div class="avatar-glow" data-v-77252161></div></div><p class="intro-role" data-v-77252161>Dev Frontend</p><p class="intro-sub" data-v-77252161>Vue · Nuxt · React</p><button class="btn-conhecer" data-v-77252161><span class="btn-text" data-v-77252161>Conhecer</span><span class="btn-arrow" data-v-77252161>↓</span></button></div><div class="${ssrRenderClass([{ "active": unref(revealing) }, "circle-expand"])}" data-v-77252161></div></div>`);
+        _push(`<div class="${ssrRenderClass([{ "revealing": unref(revealing) }, "intro-screen"])}" data-v-bcdfde3c><div class="intro-bg" data-v-bcdfde3c><div class="grid-overlay" data-v-bcdfde3c></div><div class="blob blob-purple" data-v-bcdfde3c></div><div class="blob blob-cyan" data-v-bcdfde3c></div></div><div class="${ssrRenderClass([{ "fade-out": unref(revealing) }, "intro-content"])}" data-v-bcdfde3c><div class="avatar-wrapper" data-v-bcdfde3c><div class="avatar-ring" data-v-bcdfde3c></div><div class="avatar-ring ring-2" data-v-bcdfde3c></div><div class="avatar" data-v-bcdfde3c><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="avatar-icon" data-v-bcdfde3c><circle cx="40" cy="30" r="16" fill="#7c6aff" opacity="0.9" data-v-bcdfde3c></circle><ellipse cx="40" cy="68" rx="26" ry="16" fill="#7c6aff" opacity="0.6" data-v-bcdfde3c></ellipse></svg></div><div class="avatar-glow" data-v-bcdfde3c></div></div><p class="intro-role" data-v-bcdfde3c>Dev Frontend</p><p class="intro-sub" data-v-bcdfde3c>Vue · Nuxt · React</p><button class="btn-conhecer" data-v-bcdfde3c><span class="btn-text" data-v-bcdfde3c>Conhecer</span><span class="btn-arrow" data-v-bcdfde3c>↓</span></button></div><div class="${ssrRenderClass([{ "active": unref(revealing) }, "circle-expand"])}" data-v-bcdfde3c></div></div>`);
       } else {
         _push(`<!---->`);
       }
       if (!unref(showIntro) || unref(revealing)) {
-        _push(`<div class="${ssrRenderClass([{ "visible": !unref(showIntro) }, "portfolio-content"])}" data-v-77252161>`);
+        _push(`<div class="${ssrRenderClass([{ "visible": !unref(showIntro) }, "portfolio-content"])}" data-v-bcdfde3c>`);
         _push(ssrRenderComponent(_component_SectionHero, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
         _push(ssrRenderComponent(_component_SectionSobre, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
         _push(ssrRenderComponent(_component_SectionProjetos, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
         _push(ssrRenderComponent(_component_SectionSkills, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
         _push(ssrRenderComponent(_component_SectionExperiencia, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
         _push(ssrRenderComponent(_component_SectionContato, null, null, _parent));
         _push(`</div>`);
       } else {
@@ -394,7 +394,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-77252161"]]);
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-bcdfde3c"]]);
 
 export { index as default };
-//# sourceMappingURL=index-CKiC0A-7.mjs.map
+//# sourceMappingURL=index-D-m9Uy3C.mjs.map
