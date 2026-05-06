@@ -1,5 +1,5 @@
 {
-  "installCommand": "npm install && chmod +x node_modules/.bin/nuxt",
+  "installCommand": "npm install --ignore-scripts && chmod +x node_modules/.bin/nuxt && node node_modules/.bin/nuxt prepare",
   "buildCommand": "npm run build",
   "framework": "nuxt"
 }

@@ -2,6 +2,7 @@
   "name": "meu-portfolio",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
