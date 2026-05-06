@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&family=JetBrains+Mono&display=swap');
+
+@layer components {
+  .section-label {
+    @apply font-mono text-sm tracking-widest uppercase;
+    color: #7c6aff;
+  }
+
+  .card-dark {
+    @apply bg-dark-800 border border-dark-700 rounded-xl;
+  }
+
+  .glow-line {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, #7c6aff, transparent);
+  }
+}
