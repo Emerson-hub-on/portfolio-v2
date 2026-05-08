@@ -14,6 +14,8 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 interface _GlobalComponents {
+  AdminField: typeof import("../../app/components/AdminField.vue")['default']
+  AdminSection: typeof import("../../app/components/AdminSection.vue")['default']
   SectionContato: typeof import("../../app/components/SectionContato.vue")['default']
   SectionExperiencia: typeof import("../../app/components/SectionExperiencia.vue")['default']
   SectionHero: typeof import("../../app/components/SectionHero.vue")['default']
@@ -44,6 +46,8 @@ interface _GlobalComponents {
   Html: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']
   Body: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
   NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
+  LazyAdminField: LazyComponent<typeof import("../../app/components/AdminField.vue")['default']>
+  LazyAdminSection: LazyComponent<typeof import("../../app/components/AdminSection.vue")['default']>
   LazySectionContato: LazyComponent<typeof import("../../app/components/SectionContato.vue")['default']>
   LazySectionExperiencia: LazyComponent<typeof import("../../app/components/SectionExperiencia.vue")['default']>
   LazySectionHero: LazyComponent<typeof import("../../app/components/SectionHero.vue")['default']>

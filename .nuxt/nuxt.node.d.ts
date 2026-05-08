@@ -1,3 +1,4 @@
+/// <reference types="@nuxtjs/supabase" />
 /// <reference types="@nuxtjs/tailwindcss" />
 /// <reference types="@nuxt/devtools" />
 /// <reference types="@nuxt/telemetry" />
