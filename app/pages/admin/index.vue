@@ -423,11 +423,7 @@ async function uploadPhoto(event: Event) {
     .from('portfolio')
     .upload(path, file, { upsert: true })
 
-  console.log('upload data:', data)
-  console.log('upload error:', error)
-
   if (error) {
-    console.error('Erro ao fazer upload:', error.message)
     uploading.value = false
     return
   }
