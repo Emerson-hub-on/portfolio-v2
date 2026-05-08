@@ -1,8 +1,8 @@
 import { mergeProps, withCtx, createTextVNode, toDisplayString, defineComponent, shallowRef, h, resolveComponent, computed, unref, useSSRContext } from 'vue';
-import { y as parseQuery, n as hasProtocol, l as joinURL, z as withTrailingSlash, A as withoutTrailingSlash } from '../_/nitro.mjs';
+import { G as parseQuery, n as hasProtocol, l as joinURL, H as withTrailingSlash, I as withoutTrailingSlash } from '../_/nitro.mjs';
 import { _ as _export_sfc, u as useRouter, e as encodeRoutePath, r as resolveRouteObject, n as navigateTo, a as useNuxtApp, b as useRuntimeConfig, c as nuxtLinkDefaults } from './server.mjs';
 import { ssrRenderAttrs, ssrInterpolate, ssrRenderComponent } from 'vue/server-renderer';
-import { a as useHead } from './composables-pz26RD25.mjs';
+import { a as useHead } from './composables-DQb260gL.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:events';
@@ -18,6 +18,7 @@ import 'devalue';
 import 'unhead/plugins';
 import 'unhead/utils';
 import 'vue-router';
+import '@supabase/ssr';
 
 const firstNonUndefined = (...args) => args.find((arg) => arg !== void 0);
 // @__NO_SIDE_EFFECTS__
@@ -344,7 +345,7 @@ const _sfc_main = {
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "antialiased bg-white dark:bg-[#020420] dark:text-white font-sans grid min-h-screen overflow-hidden place-content-center text-[#020420] tracking-wide" }, _attrs))} data-v-204d37bf><div class="max-w-520px text-center" data-v-204d37bf><h1 class="font-semibold leading-none mb-4 sm:text-[110px] tabular-nums text-[80px]" data-v-204d37bf>${ssrInterpolate(__props.status)}</h1><h2 class="font-semibold mb-2 sm:text-3xl text-2xl" data-v-204d37bf>${ssrInterpolate(__props.statusText)}</h2><p class="mb-4 px-2 text-[#64748B] text-md" data-v-204d37bf>${ssrInterpolate(__props.description)}</p><div class="flex items-center justify-center w-full" data-v-204d37bf>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "antialiased bg-white dark:bg-[#020420] dark:text-white font-sans grid min-h-screen overflow-hidden place-content-center text-[#020420] tracking-wide" }, _attrs))} data-v-36d25f72><div class="max-w-520px text-center" data-v-36d25f72><h1 class="font-semibold leading-none mb-4 sm:text-[110px] tabular-nums text-[80px]" data-v-36d25f72>${ssrInterpolate(__props.status)}</h1><h2 class="font-semibold mb-2 sm:text-3xl text-2xl" data-v-36d25f72>${ssrInterpolate(__props.statusText)}</h2><p class="mb-4 px-2 text-[#64748B] text-md" data-v-36d25f72>${ssrInterpolate(__props.description)}</p><div class="flex items-center justify-center w-full" data-v-36d25f72>`);
       _push(ssrRenderComponent(_component_NuxtLink, {
         to: "/",
         class: "font-medium hover:text-[#00DC82] text-sm underline underline-offset-3"
@@ -370,7 +371,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/nuxt/dist/app/components/error-404.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const error404 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-204d37bf"]]);
+const error404 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-36d25f72"]]);
 
 export { error404 as default };
-//# sourceMappingURL=error-404-Bp6cPnAx.mjs.map
+//# sourceMappingURL=error-404-DZRCFVfv.mjs.map

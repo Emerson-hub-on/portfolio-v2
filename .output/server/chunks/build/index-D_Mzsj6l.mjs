@@ -1,7 +1,11 @@
-import { ref, unref, mergeProps, createVNode, resolveDynamicComponent, computed, useSSRContext } from 'vue';
-import { ssrRenderClass, ssrRenderComponent, ssrRenderAttrs, ssrRenderStyle, ssrRenderList, ssrInterpolate, ssrRenderAttr, ssrRenderVNode } from 'vue/server-renderer';
+import { ref, unref, withAsyncContext, mergeProps, createVNode, resolveDynamicComponent, computed, useSSRContext } from 'vue';
+import { ssrRenderClass, ssrRenderComponent, ssrRenderAttrs, ssrRenderStyle, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderVNode } from 'vue/server-renderer';
+import { u as usePortfolioData } from './usePortfolioData-Fz0hWP0S.mjs';
+import { u as useSeoMeta } from './composables-DQb260gL.mjs';
 import { _ as _export_sfc } from './server.mjs';
-import { u as useSeoMeta } from './composables-pz26RD25.mjs';
+import './useSupabaseClient-H06rCZGb.mjs';
+import '../routes/renderer.mjs';
+import 'vue-bundle-renderer/runtime';
 import '../_/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -11,28 +15,34 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
 import 'unhead/server';
 import 'devalue';
 import 'unhead/plugins';
 import 'unhead/utils';
 import 'vue-router';
+import '@supabase/ssr';
 
-const _sfc_main$6 = {};
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  _push(`<section${ssrRenderAttrs(mergeProps({
-    id: "hero",
-    class: "relative min-h-screen flex items-center overflow-hidden"
-  }, _attrs))}><div class="absolute inset-0 bg-dark-950"><div class="absolute inset-0 opacity-[0.04]" style="${ssrRenderStyle({ "background-image": "linear-gradient(#7c6aff 1px, transparent 1px), linear-gradient(90deg, #7c6aff 1px, transparent 1px)", "background-size": "60px 60px" })}"></div><div class="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full opacity-10 blur-[120px] animate-pulse-glow" style="${ssrRenderStyle({ "background": "radial-gradient(circle, #7c6aff 0%, transparent 70%)" })}"></div><div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full opacity-5 blur-[100px]" style="${ssrRenderStyle({ "background": "radial-gradient(circle, #00e5cc 0%, transparent 70%)" })}"></div></div><div class="relative max-w-6xl mx-auto px-6 pt-24 pb-16 w-full"><div class="max-w-3xl"><p class="section-label mb-6 animate-fade-in opacity-0" style="${ssrRenderStyle({ "animation-delay": "0.1s", "animation-fill-mode": "forwards" })}"> Olá, seja bem-vindo </p><h1 class="font-display text-5xl md:text-7xl font-bold leading-tight mb-6 animate-fade-up opacity-0" style="${ssrRenderStyle({ "animation-delay": "0.2s", "animation-fill-mode": "forwards" })}"> Sou <span class="relative"><span class="text-transparent bg-clip-text" style="${ssrRenderStyle({ "background-image": "linear-gradient(135deg, #7c6aff, #00e5cc)" })}"> Dev Frontend </span></span><br> apaixonado <br> por interfaces. </h1><p class="text-gray-400 text-lg md:text-xl leading-relaxed max-w-xl mb-10 animate-fade-up opacity-0" style="${ssrRenderStyle({ "animation-delay": "0.4s", "animation-fill-mode": "forwards" })}"> Transformo ideias em experiências digitais incríveis. Especializado em Vue, Nuxt e React — foco em performance, acessibilidade e design. </p><div class="flex flex-wrap gap-4 animate-fade-up opacity-0" style="${ssrRenderStyle({ "animation-delay": "0.55s", "animation-fill-mode": "forwards" })}"><a href="#projetos" class="px-6 py-3 rounded-xl font-medium text-white transition-all duration-200 hover:scale-105 hover:shadow-lg" style="${ssrRenderStyle({ "background": "linear-gradient(135deg, #7c6aff, #5a4bcc)", "box-shadow": "0 4px 20px rgba(124, 106, 255, 0.3)" })}"> Ver Projetos </a><a href="#contato" class="px-6 py-3 rounded-xl font-medium text-gray-300 border border-dark-600 hover:border-accent/50 hover:text-white transition-all duration-200"> Falar comigo → </a></div><div class="mt-16 flex items-center gap-3 text-gray-600 text-sm animate-fade-in opacity-0" style="${ssrRenderStyle({ "animation-delay": "1s", "animation-fill-mode": "forwards" })}"><div class="w-px h-12 bg-gradient-to-b from-transparent to-dark-600"></div><span class="font-mono">scroll para ver mais</span></div></div><div class="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 flex-col gap-4 animate-float"><div class="card-dark px-5 py-4 flex items-center gap-3"><span class="text-2xl">⚡</span><div><p class="font-display font-bold text-white text-lg">3+</p><p class="text-gray-500 text-xs font-mono">anos de experiência</p></div></div><div class="card-dark px-5 py-4 flex items-center gap-3"><span class="text-2xl">🚀</span><div><p class="font-display font-bold text-white text-lg">20+</p><p class="text-gray-500 text-xs font-mono">projetos entregues</p></div></div></div></div></section>`);
-}
+const _sfc_main$6 = {
+  __name: "SectionHero",
+  __ssrInlineRender: true,
+  async setup(__props) {
+    let __temp, __restore;
+    const { fetchHero } = usePortfolioData();
+    const hero = ([__temp, __restore] = withAsyncContext(() => fetchHero()), __temp = await __temp, __restore(), __temp);
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(`<section${ssrRenderAttrs(mergeProps({
+        id: "hero",
+        class: "relative min-h-screen flex items-center overflow-hidden"
+      }, _attrs))}><div class="absolute inset-0 bg-dark-950"><div class="absolute inset-0 opacity-[0.04]" style="${ssrRenderStyle({ "background-image": "linear-gradient(#7c6aff 1px, transparent 1px), linear-gradient(90deg, #7c6aff 1px, transparent 1px)", "background-size": "60px 60px" })}"></div><div class="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full opacity-10 blur-[120px] animate-pulse-glow" style="${ssrRenderStyle({ "background": "radial-gradient(circle, #7c6aff 0%, transparent 70%)" })}"></div><div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full opacity-5 blur-[100px]" style="${ssrRenderStyle({ "background": "radial-gradient(circle, #00e5cc 0%, transparent 70%)" })}"></div></div><div class="relative max-w-6xl mx-auto px-6 pt-24 pb-16 w-full"><div class="max-w-3xl"><p class="section-label mb-6 animate-fade-in opacity-0" style="${ssrRenderStyle({ "animation-delay": "0.1s", "animation-fill-mode": "forwards" })}">${ssrInterpolate(unref(hero)?.welcome_tag ?? "Olá, seja bem-vindo")}</p><h1 class="font-display text-5xl md:text-7xl font-bold leading-tight mb-6 animate-fade-up opacity-0" style="${ssrRenderStyle({ "animation-delay": "0.2s", "animation-fill-mode": "forwards" })}"> Sou <span class="text-transparent bg-clip-text" style="${ssrRenderStyle({ "background-image": "linear-gradient(135deg, #7c6aff, #00e5cc)" })}">${ssrInterpolate(unref(hero)?.title_highlight ?? "Dev Frontend")}</span><br> ${ssrInterpolate(unref(hero)?.title_complement ?? "apaixonado por interfaces.")}</h1><p class="text-gray-400 text-lg md:text-xl leading-relaxed max-w-xl mb-10 animate-fade-up opacity-0" style="${ssrRenderStyle({ "animation-delay": "0.4s", "animation-fill-mode": "forwards" })}">${ssrInterpolate(unref(hero)?.description)}</p><div class="flex flex-wrap gap-4 animate-fade-up opacity-0" style="${ssrRenderStyle({ "animation-delay": "0.55s", "animation-fill-mode": "forwards" })}"><a href="#projetos" class="px-6 py-3 rounded-xl font-medium text-white transition-all duration-200 hover:scale-105 hover:shadow-lg" style="${ssrRenderStyle({ "background": "linear-gradient(135deg, #7c6aff, #5a4bcc)", "box-shadow": "0 4px 20px rgba(124, 106, 255, 0.3)" })}">${ssrInterpolate(unref(hero)?.btn_primary ?? "Ver Projetos")}</a><a href="#contato" class="px-6 py-3 rounded-xl font-medium text-gray-300 border border-dark-600 hover:border-accent/50 hover:text-white transition-all duration-200">${ssrInterpolate(unref(hero)?.btn_secondary ?? "Falar comigo →")}</a></div></div><div class="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 flex-col gap-4 animate-float"><div class="card-dark px-5 py-4 flex items-center gap-3"><span class="text-2xl">⚡</span><div><p class="font-display font-bold text-white text-lg">${ssrInterpolate(unref(hero)?.stat_experience ?? "3+")}</p><p class="text-gray-500 text-xs font-mono">anos de experiência</p></div></div><div class="card-dark px-5 py-4 flex items-center gap-3"><span class="text-2xl">🚀</span><div><p class="font-display font-bold text-white text-lg">${ssrInterpolate(unref(hero)?.stat_projects ?? "20+")}</p><p class="text-gray-500 text-xs font-mono">projetos entregues</p></div></div></div></div></section>`);
+    };
+  }
+};
 const _sfc_setup$6 = _sfc_main$6.setup;
 _sfc_main$6.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/SectionHero.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
-const __nuxt_component_0 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$6, [["ssrRender", _sfc_ssrRender]]), { __name: "SectionHero" });
 const _sfc_main$5 = {
   __name: "SectionSobre",
   __ssrInlineRender: true,
@@ -355,7 +365,7 @@ const _sfc_main = {
     const showIntro = ref(true);
     const revealing = ref(false);
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_SectionHero = __nuxt_component_0;
+      const _component_SectionHero = _sfc_main$6;
       const _component_SectionSobre = _sfc_main$5;
       const _component_SectionProjetos = __nuxt_component_2;
       const _component_SectionSkills = _sfc_main$3;
@@ -363,22 +373,22 @@ const _sfc_main = {
       const _component_SectionContato = _sfc_main$1;
       _push(`<!--[-->`);
       if (unref(showIntro)) {
-        _push(`<div class="${ssrRenderClass([{ "revealing": unref(revealing) }, "intro-screen"])}" data-v-bcdfde3c><div class="intro-bg" data-v-bcdfde3c><div class="grid-overlay" data-v-bcdfde3c></div><div class="blob blob-purple" data-v-bcdfde3c></div><div class="blob blob-cyan" data-v-bcdfde3c></div></div><div class="${ssrRenderClass([{ "fade-out": unref(revealing) }, "intro-content"])}" data-v-bcdfde3c><div class="avatar-wrapper" data-v-bcdfde3c><div class="avatar-ring" data-v-bcdfde3c></div><div class="avatar-ring ring-2" data-v-bcdfde3c></div><div class="avatar" data-v-bcdfde3c><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="avatar-icon" data-v-bcdfde3c><circle cx="40" cy="30" r="16" fill="#7c6aff" opacity="0.9" data-v-bcdfde3c></circle><ellipse cx="40" cy="68" rx="26" ry="16" fill="#7c6aff" opacity="0.6" data-v-bcdfde3c></ellipse></svg></div><div class="avatar-glow" data-v-bcdfde3c></div></div><p class="intro-role" data-v-bcdfde3c>Dev Frontend</p><p class="intro-sub" data-v-bcdfde3c>Vue · Nuxt · React</p><button class="btn-conhecer" data-v-bcdfde3c><span class="btn-text" data-v-bcdfde3c>Conhecer</span><span class="btn-arrow" data-v-bcdfde3c>↓</span></button></div><div class="${ssrRenderClass([{ "active": unref(revealing) }, "circle-expand"])}" data-v-bcdfde3c></div></div>`);
+        _push(`<div class="${ssrRenderClass([{ "revealing": unref(revealing) }, "intro-screen"])}" data-v-77252161><div class="intro-bg" data-v-77252161><div class="grid-overlay" data-v-77252161></div><div class="blob blob-purple" data-v-77252161></div><div class="blob blob-cyan" data-v-77252161></div></div><div class="${ssrRenderClass([{ "fade-out": unref(revealing) }, "intro-content"])}" data-v-77252161><div class="avatar-wrapper" data-v-77252161><div class="avatar-ring" data-v-77252161></div><div class="avatar-ring ring-2" data-v-77252161></div><div class="avatar" data-v-77252161><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="avatar-icon" data-v-77252161><circle cx="40" cy="30" r="16" fill="#7c6aff" opacity="0.9" data-v-77252161></circle><ellipse cx="40" cy="68" rx="26" ry="16" fill="#7c6aff" opacity="0.6" data-v-77252161></ellipse></svg></div><div class="avatar-glow" data-v-77252161></div></div><p class="intro-role" data-v-77252161>Dev Frontend</p><p class="intro-sub" data-v-77252161>Vue · Nuxt · React</p><button class="btn-conhecer" data-v-77252161><span class="btn-text" data-v-77252161>Conhecer</span><span class="btn-arrow" data-v-77252161>↓</span></button></div><div class="${ssrRenderClass([{ "active": unref(revealing) }, "circle-expand"])}" data-v-77252161></div></div>`);
       } else {
         _push(`<!---->`);
       }
       if (!unref(showIntro) || unref(revealing)) {
-        _push(`<div class="${ssrRenderClass([{ "visible": !unref(showIntro) }, "portfolio-content"])}" data-v-bcdfde3c>`);
+        _push(`<div class="${ssrRenderClass([{ "visible": !unref(showIntro) }, "portfolio-content"])}" data-v-77252161>`);
         _push(ssrRenderComponent(_component_SectionHero, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
         _push(ssrRenderComponent(_component_SectionSobre, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
         _push(ssrRenderComponent(_component_SectionProjetos, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
         _push(ssrRenderComponent(_component_SectionSkills, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
         _push(ssrRenderComponent(_component_SectionExperiencia, null, null, _parent));
-        _push(`<div class="glow-line opacity-20" data-v-bcdfde3c></div>`);
+        _push(`<div class="glow-line opacity-20" data-v-77252161></div>`);
         _push(ssrRenderComponent(_component_SectionContato, null, null, _parent));
         _push(`</div>`);
       } else {
@@ -394,7 +404,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/index.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-bcdfde3c"]]);
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-77252161"]]);
 
 export { index as default };
-//# sourceMappingURL=index-D-m9Uy3C.mjs.map
+//# sourceMappingURL=index-D_Mzsj6l.mjs.map

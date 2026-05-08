@@ -24,4 +24,4 @@ function useSeoMeta(input, options = {}) {
 }
 
 export { useHead as a, useSeoMeta as u };
-//# sourceMappingURL=composables-pz26RD25.mjs.map
+//# sourceMappingURL=composables-DQb260gL.mjs.map

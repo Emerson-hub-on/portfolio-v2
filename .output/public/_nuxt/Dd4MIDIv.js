@@ -1,0 +1,1 @@
+import{Z as s,$ as n,n as o}from"./DWoFG419.js";import{u as i}from"./U7jY7zit.js";const d=s(async()=>{let e,t;const{data:a}=([e,t]=n(()=>i().auth.getSession()),e=await e,t(),e);if(!a.session)return o("/admin/login")});export{d as default};

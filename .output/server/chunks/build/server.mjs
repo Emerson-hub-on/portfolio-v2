@@ -1,7 +1,8 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { hasInjectionContext, getCurrentInstance, defineComponent, h, inject, computed, unref, shallowRef, provide, shallowReactive, createElementBlock, ref, Suspense, Fragment, createApp, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, reactive, effectScope, defineAsyncComponent, mergeProps, getCurrentScope, toRef, withCtx, nextTick, isReadonly, useSSRContext, isRef, isShallow, isReactive, toRaw } from 'vue';
-import { p as parseURL, e as encodePath, m as decodePath, n as hasProtocol, o as isScriptProtocol, l as joinURL, w as withQuery, q as sanitizeStatusCode, r as getContext, $ as $fetch, v as defu, i as createError$1, x as executeAsync } from '../_/nitro.mjs';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { hasInjectionContext, getCurrentInstance, defineComponent, h, inject, computed, unref, shallowRef, provide, shallowReactive, createElementBlock, ref, Suspense, Fragment, createApp, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, reactive, effectScope, defineAsyncComponent, mergeProps, getCurrentScope, toRef, withCtx, nextTick, isReadonly, useSSRContext, isRef, isShallow, isReactive, toRaw, customRef } from 'vue';
+import { p as parseURL, e as encodePath, m as decodePath, n as hasProtocol, o as isScriptProtocol, l as joinURL, w as withQuery, q as sanitizeStatusCode, r as getContext, $ as $fetch, v as defu, i as createError$1, x as executeAsync, y as getHeader, z as setCookie, A as setHeader, B as klona, C as getRequestHeader, D as isEqual, E as getCookie, F as deleteCookie } from '../_/nitro.mjs';
 import { b as baseURL } from '../routes/renderer.mjs';
 import { useRoute as useRoute$1, RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
+import { createServerClient, parseCookieHeader } from '@supabase/ssr';
 import { ssrRenderSuspense, ssrRenderComponent, ssrRenderVNode } from 'vue/server-renderer';
 import 'node:http';
 import 'node:https';
@@ -188,6 +189,59 @@ var Hookable = class {
 };
 function createHooks() {
 	return new Hookable();
+}
+
+const NullObject = /* @__PURE__ */ (() => {
+  const C = function() {
+  };
+  C.prototype = /* @__PURE__ */ Object.create(null);
+  return C;
+})();
+function parse(str, options) {
+  if (typeof str !== "string") {
+    throw new TypeError("argument str must be a string");
+  }
+  const obj = new NullObject();
+  const opt = options || {};
+  const dec = opt.decode || decode;
+  let index = 0;
+  while (index < str.length) {
+    const eqIdx = str.indexOf("=", index);
+    if (eqIdx === -1) {
+      break;
+    }
+    let endIdx = str.indexOf(";", index);
+    if (endIdx === -1) {
+      endIdx = str.length;
+    } else if (endIdx < eqIdx) {
+      index = str.lastIndexOf(";", eqIdx - 1) + 1;
+      continue;
+    }
+    const key = str.slice(index, eqIdx).trim();
+    if (opt?.filter && !opt?.filter(key)) {
+      index = endIdx + 1;
+      continue;
+    }
+    if (void 0 === obj[key]) {
+      let val = str.slice(eqIdx + 1, endIdx).trim();
+      if (val.codePointAt(0) === 34) {
+        val = val.slice(1, -1);
+      }
+      obj[key] = tryDecode(val, dec);
+    }
+    index = endIdx + 1;
+  }
+  return obj;
+}
+function decode(str) {
+  return str.includes("%") ? decodeURIComponent(str) : str;
+}
+function tryDecode(str, decode2) {
+  try {
+    return decode2(str);
+  } catch {
+    return str;
+  }
 }
 
 if (!globalThis.$fetch) {
@@ -428,6 +482,20 @@ const useRoute = () => {
 function defineNuxtRouteMiddleware(middleware) {
   return middleware;
 }
+const addRouteMiddleware = (name, middleware, options = {}) => {
+  const nuxtApp = useNuxtApp();
+  const global = options.global || typeof name !== "string";
+  const mw = middleware;
+  if (!mw) {
+    console.warn("[nuxt] No route middleware passed to `addRouteMiddleware`.", name);
+    return;
+  }
+  if (global) {
+    nuxtApp._middleware.global.push(mw);
+  } else {
+    nuxtApp._middleware.named[name] = mw;
+  }
+};
 const isProcessingMiddleware = () => {
   try {
     if (useNuxtApp()._processingMiddleware) {
@@ -564,10 +632,18 @@ const unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU = /* @__PURE__ */ defin
 function toArray$1(value) {
   return Array.isArray(value) ? value : [value];
 }
-const matcher = (m, p) => {
-  return [];
-};
-const _routeRulesMatcher = (path) => defu({}, ...matcher().map((r) => r.data).reverse());
+const matcher = /* @__PURE__ */ (() => {
+  const $0 = { ssr: false };
+  return (m, p) => {
+    let r = [];
+    if (p.charCodeAt(p.length - 1) === 47) p = p.slice(0, -1) || "/";
+    if (p === "/confirm") {
+      r.unshift({ data: $0 });
+    }
+    return r;
+  };
+})();
+const _routeRulesMatcher = (path) => defu({}, ...matcher("", path).map((r) => r.data).reverse());
 const routeRulesMatcher$1 = _routeRulesMatcher;
 function getRouteRules(arg) {
   const path = typeof arg === "string" ? arg : arg.path;
@@ -578,11 +654,25 @@ function getRouteRules(arg) {
     return {};
   }
 }
+const __nuxt_page_meta$1 = { layout: false };
+const __nuxt_page_meta = { layout: false };
 const _routes = [
+  {
+    name: "admin-login",
+    path: "/admin/login",
+    meta: __nuxt_page_meta$1 || {},
+    component: () => import('./login-0c7NgtWh.mjs')
+  },
+  {
+    name: "admin",
+    path: "/admin",
+    meta: { ...__nuxt_page_meta || {}, ...{ "middleware": "auth" } },
+    component: () => import('./index-Bm7dVfxK.mjs')
+  },
   {
     name: "index",
     path: "/",
-    component: () => import('./index-D-m9Uy3C.mjs')
+    component: () => import('./index-D_Mzsj6l.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -726,7 +816,9 @@ const globalMiddleware = [
   validate,
   manifest_45route_45rule
 ];
-const namedMiddleware = {};
+const namedMiddleware = {
+  auth: () => import('./auth-CObCcnaA.mjs')
+};
 const plugin = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
   enforce: "pre",
@@ -931,6 +1023,164 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     return { provide: { router } };
   }
 });
+async function fetchWithRetry(req, init) {
+  const retries = 3;
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      return await fetch(req, init);
+    } catch (error) {
+      if (init?.signal?.aborted) {
+        throw error;
+      }
+      if (attempt === retries) {
+        const { headers: _headers, ...safeInit } = init ?? {};
+        console.error(`Error fetching request ${req}`, error, safeInit);
+        throw error;
+      }
+      console.warn(`Retrying fetch attempt ${attempt + 1} for request: ${req}`);
+      await new Promise((resolve) => setTimeout(resolve, 100 * attempt));
+    }
+  }
+  throw new Error("Unreachable code");
+}
+function setCookies(event, cookies, headers = {}) {
+  const response = event.node.res;
+  const headersWritable = () => !response.headersSent && !response.writableEnded;
+  if (!headersWritable()) {
+    return;
+  }
+  for (const { name, value, options } of cookies) {
+    if (!headersWritable()) {
+      break;
+    }
+    setCookie(event, name, value, options);
+  }
+  for (const [key, value] of Object.entries(headers)) {
+    if (!headersWritable()) {
+      break;
+    }
+    setHeader(event, key, value);
+  }
+}
+const serverSupabaseClient = async (event) => {
+  if (!event.context._supabaseClient) {
+    const {
+      url,
+      key,
+      cookiePrefix,
+      cookieOptions,
+      clientOptions: { auth = {}, global = {} }
+    } = (/* @__PURE__ */ useRuntimeConfig()).public.supabase;
+    event.context._supabaseClient = createServerClient(url, key, {
+      auth,
+      cookies: {
+        getAll: () => parseCookieHeader(getHeader(event, "Cookie") ?? ""),
+        setAll: (cookies, headers) => setCookies(event, cookies, headers)
+      },
+      cookieOptions: {
+        ...cookieOptions,
+        name: cookiePrefix
+      },
+      global: {
+        fetch: fetchWithRetry,
+        ...global
+      }
+    });
+  }
+  return event.context._supabaseClient;
+};
+const serverSupabaseUser = async (event) => {
+  const client = await serverSupabaseClient(event);
+  const { data, error } = await client.auth.getClaims();
+  if (error) {
+    throw createError$1({ statusMessage: error?.message });
+  }
+  return data?.claims ?? null;
+};
+const serverSupabaseSession = async (event) => {
+  const client = await serverSupabaseClient(event);
+  const { data: { session }, error } = await client.auth.getSession();
+  if (error) {
+    throw createError$1({ statusMessage: error?.message });
+  }
+  delete session?.user;
+  return session;
+};
+const useStateKeyPrefix = "$s";
+function useState(...args) {
+  const autoKey = typeof args[args.length - 1] === "string" ? args.pop() : void 0;
+  if (typeof args[0] !== "string") {
+    args.unshift(autoKey);
+  }
+  const [_key, init] = args;
+  if (!_key || typeof _key !== "string") {
+    throw new TypeError("[nuxt] [useState] key must be a string: " + _key);
+  }
+  if (init !== void 0 && typeof init !== "function") {
+    throw new Error("[nuxt] [useState] init must be a function: " + init);
+  }
+  const key = useStateKeyPrefix + _key;
+  const nuxtApp = useNuxtApp();
+  const state = toRef(nuxtApp.payload.state, key);
+  if (init) {
+    nuxtApp._state[key] ??= { _default: init };
+  }
+  if (state.value === void 0 && init) {
+    const initialValue = init();
+    if (isRef(initialValue)) {
+      nuxtApp.payload.state[key] = initialValue;
+      return initialValue;
+    }
+    state.value = initialValue;
+  }
+  return state;
+}
+const useSupabaseSession = () => useState("supabase_session", () => null);
+const useSupabaseUser = () => useState("supabase_user", () => null);
+function useRequestEvent(nuxtApp) {
+  nuxtApp ||= useNuxtApp();
+  return nuxtApp.ssrContext?.event;
+}
+const supabase_server_NZuw_NDm2ZtOgvg4QqXN_Xqdg_KPvGuBBWKrLH15GWY = /* @__PURE__ */ defineNuxtPlugin({
+  name: "supabase",
+  enforce: "pre",
+  async setup({ provide: provide2 }) {
+    let __temp, __restore;
+    const {
+      url,
+      key,
+      cookiePrefix,
+      useSsrCookies,
+      cookieOptions,
+      clientOptions
+    } = (/* @__PURE__ */ useRuntimeConfig()).public.supabase;
+    const event = useRequestEvent();
+    const client = createServerClient(url, key, {
+      ...clientOptions,
+      cookies: {
+        getAll: () => parseCookieHeader(getHeader(event, "Cookie") ?? ""),
+        setAll: (cookies, headers) => setCookies(event, cookies, headers)
+      },
+      cookieOptions: {
+        ...cookieOptions,
+        name: cookiePrefix
+      },
+      global: {
+        fetch: fetchWithRetry,
+        ...clientOptions.global
+      }
+    });
+    provide2("supabase", { client });
+    if (useSsrCookies) {
+      const [session, user] = ([__temp, __restore] = executeAsync(() => Promise.all([
+        serverSupabaseSession(event).catch(() => null),
+        serverSupabaseUser(event).catch(() => null)
+      ])), __temp = await __temp, __restore(), __temp);
+      useSupabaseSession().value = session;
+      useSupabaseUser().value = user;
+    }
+  }
+});
 function definePayloadReducer(name, reduce) {
   {
     useNuxtApp().ssrContext["~payloadReducers"][name] = reduce;
@@ -956,11 +1206,182 @@ const revive_payload_server_MVtmlZaQpj6ApFmshWfUWl5PehCebzaBf2NuRMiIbms = /* @__
 const components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8 = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:global-components"
 });
+function parseCookieValue(value) {
+  if (value === "undefined") {
+    return void 0;
+  }
+  try {
+    const parsed = JSON.parse(value);
+    if (typeof parsed === "number" && String(parsed) !== value) {
+      return value;
+    }
+    return parsed;
+  } catch {
+    return value;
+  }
+}
+const CookieDefaults = {
+  path: "/",
+  watch: true,
+  decode: (val) => val ? parseCookieValue(decodeURIComponent(val)) : val,
+  encode: (val) => {
+    if (typeof val !== "string" || val === "undefined") {
+      return encodeURIComponent(JSON.stringify(val));
+    }
+    try {
+      if (typeof JSON.parse(val) !== "string") {
+        return encodeURIComponent(JSON.stringify(val));
+      }
+    } catch {
+    }
+    return encodeURIComponent(val);
+  },
+  refresh: false
+};
+function useCookie(name, _opts) {
+  const opts = { ...CookieDefaults, ..._opts };
+  opts.filter ??= (key) => key === name;
+  const cookies = readRawCookies(opts) || {};
+  let delay;
+  if (opts.maxAge !== void 0) {
+    delay = opts.maxAge * 1e3;
+  } else if (opts.expires) {
+    delay = opts.expires.getTime() - Date.now();
+  }
+  const hasExpired = delay !== void 0 && delay <= 0;
+  const cookieValue = klona(hasExpired ? void 0 : cookies[name] ?? opts.default?.());
+  const cookie = cookieServerRef(name, cookieValue);
+  {
+    const nuxtApp = useNuxtApp();
+    const writeFinalCookieValue = () => {
+      const valueIsSame = isEqual(cookie.value, cookies[name]);
+      if (opts.readonly || valueIsSame && !opts.refresh) {
+        return;
+      }
+      nuxtApp._cookiesChanged ||= {};
+      if (valueIsSame && opts.refresh && !nuxtApp._cookiesChanged[name]) {
+        return;
+      }
+      nuxtApp._cookies ||= {};
+      if (name in nuxtApp._cookies) {
+        if (isEqual(cookie.value, nuxtApp._cookies[name])) {
+          return;
+        }
+      }
+      nuxtApp._cookies[name] = cookie.value;
+      const encoded = cookie.value === null || cookie.value === void 0 ? void 0 : opts.encode(cookie.value);
+      writeServerCookie(useRequestEvent(nuxtApp), name, encoded, opts);
+    };
+    const unhook = nuxtApp.hooks.hookOnce("app:rendered", writeFinalCookieValue);
+    nuxtApp.hooks.hookOnce("app:error", () => {
+      unhook();
+      return writeFinalCookieValue();
+    });
+  }
+  return cookie;
+}
+function readRawCookies(opts = {}) {
+  {
+    return parse(getRequestHeader(useRequestEvent(), "cookie") || "", opts);
+  }
+}
+const identityEncode = (val) => val;
+function toSerializeOptions(opts) {
+  const { encode: _encode, decode: _decode, ...rest } = opts;
+  return { ...rest, encode: identityEncode };
+}
+function writeServerCookie(event, name, value, opts = {}) {
+  if (event) {
+    const serializeOpts = toSerializeOptions(opts);
+    if (value !== void 0) {
+      return setCookie(event, name, value, serializeOpts);
+    }
+    if (getCookie(event, name) !== void 0) {
+      return deleteCookie(event, name, serializeOpts);
+    }
+  }
+}
+function cookieServerRef(name, value) {
+  const internalRef = ref(value);
+  const nuxtApp = useNuxtApp();
+  return customRef((track, trigger) => {
+    return {
+      get() {
+        track();
+        return internalRef.value;
+      },
+      set(newValue) {
+        nuxtApp._cookiesChanged ||= {};
+        nuxtApp._cookiesChanged[name] = true;
+        internalRef.value = newValue;
+        trigger();
+      }
+    };
+  });
+}
+const useSupabaseCookieRedirect = () => {
+  const config = (/* @__PURE__ */ useRuntimeConfig()).public.supabase;
+  const prefix = config.redirectOptions.saveRedirectToCookie ? config.cookiePrefix : config.cookieName;
+  const cookie = useCookie(
+    `${prefix}-redirect-path`,
+    {
+      ...config.cookieOptions,
+      readonly: false
+    }
+  );
+  return {
+    path: cookie,
+    pluck: () => {
+      const value = cookie.value;
+      cookie.value = null;
+      return value;
+    }
+  };
+};
+function matchesAnyPattern(path, patterns) {
+  return patterns.some((pattern) => {
+    if (!pattern) return false;
+    const regex = new RegExp(`^${pattern.replace(/\*/g, ".*")}$`);
+    return regex.test(path);
+  });
+}
+const auth_redirect_HUzDltIkO2fpUO5JHjqMueRAOThb4ANNc2aslGKOTOY = /* @__PURE__ */ defineNuxtPlugin({
+  name: "auth-redirect",
+  setup() {
+    addRouteMiddleware(
+      "global-auth",
+      /* @__PURE__ */ defineNuxtRouteMiddleware((to) => {
+        const config = (/* @__PURE__ */ useRuntimeConfig()).public.supabase;
+        const { login, callback, include, exclude, cookieRedirect, saveRedirectToCookie } = config.redirectOptions;
+        if (include && include.length > 0) {
+          if (!matchesAnyPattern(to.path, include)) {
+            return;
+          }
+        }
+        const excludePatterns = [login, callback, ...exclude ?? []];
+        if (matchesAnyPattern(to.path, excludePatterns)) {
+          return;
+        }
+        const session = useSupabaseSession();
+        if (!session.value) {
+          if (cookieRedirect || saveRedirectToCookie) {
+            const redirectInfo = useSupabaseCookieRedirect();
+            redirectInfo.path.value = to.fullPath;
+          }
+          return navigateTo(login);
+        }
+      }),
+      { global: true }
+    );
+  }
+});
 const plugins = [
   unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU,
   plugin,
+  supabase_server_NZuw_NDm2ZtOgvg4QqXN_Xqdg_KPvGuBBWKrLH15GWY,
   revive_payload_server_MVtmlZaQpj6ApFmshWfUWl5PehCebzaBf2NuRMiIbms,
-  components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8
+  components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8,
+  auth_redirect_HUzDltIkO2fpUO5JHjqMueRAOThb4ANNc2aslGKOTOY
 ];
 const layouts = {};
 const routeRulesMatcher = _routeRulesMatcher;
@@ -1252,8 +1673,8 @@ const _sfc_main$1 = {
     const statusText = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-Bp6cPnAx.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-vn3UfUc8.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-DZRCFVfv.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-E6wpmEeT.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ status: unref(status), statusText: unref(statusText), statusCode: unref(status), statusMessage: unref(statusText), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
@@ -1345,5 +1766,5 @@ let entry;
 }
 const entry_default = ((ssrContext) => entry(ssrContext));
 
-export { _export_sfc as _, useNuxtApp as a, useRuntimeConfig as b, nuxtLinkDefaults as c, entry_default as default, encodeRoutePath as e, navigateTo as n, resolveRouteObject as r, useRouter as u };
+export { _export_sfc as _, useNuxtApp as a, useRuntimeConfig as b, nuxtLinkDefaults as c, defineNuxtRouteMiddleware as d, entry_default as default, encodeRoutePath as e, navigateTo as n, resolveRouteObject as r, useRouter as u };
 //# sourceMappingURL=server.mjs.map
