@@ -56,6 +56,66 @@ export type Database = {
         }
         Relationships: []
       }
+      contact: {
+        Row: {
+          email: string | null
+          github_url: string | null
+          id: string
+          linkedin_url: string | null
+          twitter_url: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          email?: string | null
+          github_url?: string | null
+          id?: string
+          linkedin_url?: string | null
+          twitter_url?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          email?: string | null
+          github_url?: string | null
+          id?: string
+          linkedin_url?: string | null
+          twitter_url?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      experiences: {
+        Row: {
+          company: string
+          description: string | null
+          id: string
+          order_index: number | null
+          period: string
+          role: string
+          tags: string[] | null
+          updated_at: string | null
+        }
+        Insert: {
+          company: string
+          description?: string | null
+          id?: string
+          order_index?: number | null
+          period: string
+          role: string
+          tags?: string[] | null
+          updated_at?: string | null
+        }
+        Update: {
+          company?: string
+          description?: string | null
+          id?: string
+          order_index?: number | null
+          period?: string
+          role?: string
+          tags?: string[] | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       hero: {
         Row: {
           btn_primary: string | null
@@ -98,8 +158,10 @@ export type Database = {
       projects: {
         Row: {
           created_at: string | null
+          demo_url: string | null
           description: string | null
           emoji: string | null
+          github_url: string | null
           id: string
           name: string
           order_index: number | null
@@ -109,8 +171,10 @@ export type Database = {
         }
         Insert: {
           created_at?: string | null
+          demo_url?: string | null
           description?: string | null
           emoji?: string | null
+          github_url?: string | null
           id?: string
           name: string
           order_index?: number | null
@@ -120,8 +184,10 @@ export type Database = {
         }
         Update: {
           created_at?: string | null
+          demo_url?: string | null
           description?: string | null
           emoji?: string | null
+          github_url?: string | null
           id?: string
           name?: string
           order_index?: number | null
@@ -130,6 +196,80 @@ export type Database = {
           visible?: boolean | null
         }
         Relationships: []
+      }
+      skill_groups: {
+        Row: {
+          emoji: string | null
+          id: string
+          name: string
+          order_index: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          emoji?: string | null
+          id?: string
+          name: string
+          order_index?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          emoji?: string | null
+          id?: string
+          name?: string
+          order_index?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      skill_tags: {
+        Row: {
+          id: string
+          name: string
+          order_index: number | null
+        }
+        Insert: {
+          id?: string
+          name: string
+          order_index?: number | null
+        }
+        Update: {
+          id?: string
+          name?: string
+          order_index?: number | null
+        }
+        Relationships: []
+      }
+      skills: {
+        Row: {
+          group_id: string | null
+          id: string
+          level: number | null
+          name: string
+          order_index: number | null
+        }
+        Insert: {
+          group_id?: string | null
+          id?: string
+          level?: number | null
+          name: string
+          order_index?: number | null
+        }
+        Update: {
+          group_id?: string | null
+          id?: string
+          level?: number | null
+          name?: string
+          order_index?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "skills_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "skill_groups"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
