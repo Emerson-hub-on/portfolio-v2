@@ -43,7 +43,7 @@
             <span class="text-accent">{{ about?.title_line2 ?? 'resultados reais.' }}</span>
           </h2>
 
-          <div class="space-y-4 text-gray-400 leading-relaxed">
+          <div class="space-y-4 text-gray-800 leading-relaxed">
             <p>{{ about?.paragraph1 }}</p>
             <p>{{ about?.paragraph2 }}</p>
           </div>

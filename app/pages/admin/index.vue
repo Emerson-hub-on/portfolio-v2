@@ -158,11 +158,22 @@ async function save() {
   }
   if (active.value === 'about')      await updateAbout(about.value)
   if (active.value === 'contact')    await updateContact(contact.value)
-  if (active.value === 'projects') {
+    if (active.value === 'projects') {
     for (const proj of projects.value) {
-      await upsertProject({ ...proj, tags: proj.tagsInput?.split(',').map((t: string) => t.trim()).filter(Boolean) || [] })
+        const { tagsInput, ...rest } = proj
+        await upsertProject({
+        id: rest.id,
+        name: rest.name,
+        description: rest.description || null,
+        emoji: rest.emoji || '🚀',
+        tags: tagsInput?.split(',').map((t: string) => t.trim()).filter(Boolean) || [],
+        demo_url: rest.demo_url || null,
+        github_url: rest.github_url || null,
+        visible: rest.visible ?? true,
+        order_index: rest.order_index ?? 0,
+        })
     }
-  }
+    }
   if (active.value === 'skills') {
     for (const tag of skillTags.value) await upsertSkillTag(tag)
     for (const group of skillGroups.value) {
@@ -210,7 +221,17 @@ async function uploadPhoto(event: Event) {
 }
 
 function addProject() {
-  projects.value.push({ name: '', description: '', emoji: '🚀', tags: [], tagsInput: '', visible: true, order_index: projects.value.length })
+  projects.value.push({
+    name: '',
+    description: '',
+    emoji: '🚀',
+    tags: [],
+    tagsInput: '',
+    demo_url: '',
+    github_url: '',
+    visible: true,
+    order_index: projects.value.length
+  })
 }
 
 function removeProject(i: number) {
