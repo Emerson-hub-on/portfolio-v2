@@ -1,11 +1,24 @@
 <template>
   <div class="min-h-screen bg-dark-950 text-white flex">
 
+    <!-- Overlay mobile -->
+    <div
+      v-if="menuOpen"
+      class="fixed inset-0 bg-black/60 z-20 md:hidden"
+      @click="menuOpen = false"
+    />
+
     <!-- Sidebar -->
-    <aside class="w-52 shrink-0 bg-dark-900 border-r border-dark-700 flex flex-col">
-      <div class="px-4 py-5 border-b border-dark-700">
-        <p class="text-xs font-mono text-accent tracking-widest uppercase">Portfolio CMS</p>
-        <p class="text-xs text-gray-500 mt-0.5">Painel admin</p>
+    <aside
+      class="fixed md:relative inset-y-0 left-0 z-30 w-52 shrink-0 bg-dark-900 border-r border-dark-700 flex flex-col transition-transform duration-300"
+      :class="menuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'"
+    >
+      <div class="px-4 py-5 border-b border-dark-700 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-mono text-accent tracking-widest uppercase">Portfolio CMS</p>
+          <p class="text-xs text-gray-500 mt-0.5">Painel admin</p>
+        </div>
+        <button class="md:hidden text-gray-500 hover:text-white" @click="menuOpen = false">✕</button>
       </div>
 
       <nav class="p-2 flex-1 flex flex-col gap-0.5">
@@ -17,7 +30,7 @@
           :class="active === tab.id
             ? 'bg-accent/10 text-accent border-l-2 border-accent pl-[10px]'
             : 'text-gray-400 hover:text-white hover:bg-dark-800'"
-          @click="active = tab.id"
+          @click="active = tab.id; menuOpen = false"
         >
           <span>{{ tab.icon }}</span>
           {{ tab.label }}
@@ -35,16 +48,27 @@
     </aside>
 
     <!-- Main -->
-    <div class="flex-1 flex flex-col overflow-hidden">
+    <div class="flex-1 flex flex-col overflow-hidden min-w-0">
 
       <!-- Topbar -->
-      <header class="flex items-center justify-between px-6 py-4 border-b border-dark-700 bg-dark-900">
-        <div>
-          <h1 class="font-display font-semibold text-base">{{ currentTab.label }}</h1>
-          <p class="text-xs text-gray-500 mt-0.5">{{ currentTab.sub }}</p>
+      <header class="flex items-center justify-between px-4 md:px-6 py-4 border-b border-dark-700 bg-dark-900 gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <!-- Hamburguer -->
+          <button
+            class="md:hidden flex flex-col gap-1.5 p-1 shrink-0"
+            @click="menuOpen = true"
+          >
+            <span class="w-5 h-0.5 bg-gray-400 block" />
+            <span class="w-5 h-0.5 bg-gray-400 block" />
+            <span class="w-5 h-0.5 bg-gray-400 block" />
+          </button>
+          <div class="min-w-0">
+            <h1 class="font-display font-semibold text-sm md:text-base truncate">{{ currentTab.label }}</h1>
+            <p class="text-xs text-gray-500 mt-0.5 hidden sm:block">{{ currentTab.sub }}</p>
+          </div>
         </div>
         <button
-          class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-opacity hover:opacity-80 disabled:opacity-40"
+          class="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium text-white transition-opacity hover:opacity-80 disabled:opacity-40 shrink-0"
           style="background: linear-gradient(135deg, #7c6aff, #5a4bcc);"
           :disabled="saving"
           @click="save"
@@ -54,21 +78,21 @@
       </header>
 
       <!-- Content -->
-        <main class="flex-1 overflow-y-auto p-6">
+      <main class="flex-1 overflow-y-auto p-4 md:p-6">
         <Transition name="toast">
-            <div v-if="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-green-300 border border-green-500/30 bg-dark-800">
+          <div v-if="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-green-300 border border-green-500/30 bg-dark-800">
             ✓ Salvo com sucesso!
-            </div>
+          </div>
         </Transition>
 
-        <AdminPanelHero      v-if="active === 'hero'"       :hero="hero"             :about="about" />
-        <AdminPanelAbout     v-if="active === 'about'"      :about="about"           :uploading="uploading" @upload="uploadPhoto" />
-        <AdminPanelProjects  v-if="active === 'projects'"   :projects="projects"     @add="addProject" @remove="removeProject" @change-emoji="changeEmoji" />
-        <AdminPanelSkills    v-if="active === 'skills'"     :skill-groups="skillGroups" :skill-tags="skillTags" @add-group="addSkillGroup" @remove-group="removeSkillGroup" />
-        <AdminPanelExperience v-if="active === 'experience'" :experiences="experiences" @add="addExperience" @remove="removeExperience" />
-        <AdminPanelContact   v-if="active === 'contact'"    :contact="contact" />
-        <AdminPanelSettings  v-if="active === 'settings'"   :pw-msg="pwMsg" @change-password="handleChangePassword" />
-        </main>
+        <AdminPanelHero       v-if="active === 'hero'"       :hero="hero"                :about="about" />
+        <AdminPanelAbout      v-if="active === 'about'"      :about="about"              :uploading="uploading" @upload="uploadPhoto" />
+        <AdminPanelProjects   v-if="active === 'projects'"   :projects="projects"        @add="addProject" @remove="removeProject" @change-emoji="changeEmoji" />
+        <AdminPanelSkills     v-if="active === 'skills'"     :skill-groups="skillGroups" :skill-tags="skillTags" @add-group="addSkillGroup" @remove-group="removeSkillGroup" />
+        <AdminPanelExperience v-if="active === 'experience'" :experiences="experiences"  @add="addExperience" @remove="removeExperience" />
+        <AdminPanelContact    v-if="active === 'contact'"    :contact="contact" />
+        <AdminPanelSettings   v-if="active === 'settings'"   :pw-msg="pwMsg"             @change-password="handleChangePassword" />
+      </main>
     </div>
   </div>
 </template>
@@ -92,6 +116,7 @@ const active = ref('hero')
 const saving = ref(false)
 const uploading = ref(false)
 const toast = ref(false)
+const menuOpen = ref(false)
 const fileInput = ref<HTMLInputElement | null>(null)
 const newPassword = ref('')
 const confirmPassword = ref('')
