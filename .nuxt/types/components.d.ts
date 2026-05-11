@@ -14,14 +14,21 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 interface _GlobalComponents {
-  AdminField: typeof import("../../app/components/AdminField.vue")['default']
-  AdminSection: typeof import("../../app/components/AdminSection.vue")['default']
-  SectionContato: typeof import("../../app/components/SectionContato.vue")['default']
-  SectionExperiencia: typeof import("../../app/components/SectionExperiencia.vue")['default']
-  SectionHero: typeof import("../../app/components/SectionHero.vue")['default']
-  SectionProjetos: typeof import("../../app/components/SectionProjetos.vue")['default']
-  SectionSkills: typeof import("../../app/components/SectionSkills.vue")['default']
-  SectionSobre: typeof import("../../app/components/SectionSobre.vue")['default']
+  AdminField: typeof import("../../app/components/admin/Field.vue")['default']
+  AdminPanelAbout: typeof import("../../app/components/admin/PanelAbout.vue")['default']
+  AdminPanelContact: typeof import("../../app/components/admin/PanelContact.vue")['default']
+  AdminPanelExperience: typeof import("../../app/components/admin/PanelExperience.vue")['default']
+  AdminPanelHero: typeof import("../../app/components/admin/PanelHero.vue")['default']
+  AdminPanelProjects: typeof import("../../app/components/admin/PanelProjects.vue")['default']
+  AdminPanelSettings: typeof import("../../app/components/admin/PanelSettings.vue")['default']
+  AdminPanelSkills: typeof import("../../app/components/admin/PanelSkills.vue")['default']
+  AdminSection: typeof import("../../app/components/admin/Section.vue")['default']
+  SectionsContato: typeof import("../../app/components/sections/Contato.vue")['default']
+  SectionsExperiencia: typeof import("../../app/components/sections/Experiencia.vue")['default']
+  SectionsHero: typeof import("../../app/components/sections/Hero.vue")['default']
+  SectionsProjetos: typeof import("../../app/components/sections/Projetos.vue")['default']
+  SectionsSkills: typeof import("../../app/components/sections/Skills.vue")['default']
+  SectionsSobre: typeof import("../../app/components/sections/Sobre.vue")['default']
   NuxtWelcome: typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
   NuxtLayout: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
   NuxtErrorBoundary: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -46,14 +53,21 @@ interface _GlobalComponents {
   Html: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']
   Body: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
   NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
-  LazyAdminField: LazyComponent<typeof import("../../app/components/AdminField.vue")['default']>
-  LazyAdminSection: LazyComponent<typeof import("../../app/components/AdminSection.vue")['default']>
-  LazySectionContato: LazyComponent<typeof import("../../app/components/SectionContato.vue")['default']>
-  LazySectionExperiencia: LazyComponent<typeof import("../../app/components/SectionExperiencia.vue")['default']>
-  LazySectionHero: LazyComponent<typeof import("../../app/components/SectionHero.vue")['default']>
-  LazySectionProjetos: LazyComponent<typeof import("../../app/components/SectionProjetos.vue")['default']>
-  LazySectionSkills: LazyComponent<typeof import("../../app/components/SectionSkills.vue")['default']>
-  LazySectionSobre: LazyComponent<typeof import("../../app/components/SectionSobre.vue")['default']>
+  LazyAdminField: LazyComponent<typeof import("../../app/components/admin/Field.vue")['default']>
+  LazyAdminPanelAbout: LazyComponent<typeof import("../../app/components/admin/PanelAbout.vue")['default']>
+  LazyAdminPanelContact: LazyComponent<typeof import("../../app/components/admin/PanelContact.vue")['default']>
+  LazyAdminPanelExperience: LazyComponent<typeof import("../../app/components/admin/PanelExperience.vue")['default']>
+  LazyAdminPanelHero: LazyComponent<typeof import("../../app/components/admin/PanelHero.vue")['default']>
+  LazyAdminPanelProjects: LazyComponent<typeof import("../../app/components/admin/PanelProjects.vue")['default']>
+  LazyAdminPanelSettings: LazyComponent<typeof import("../../app/components/admin/PanelSettings.vue")['default']>
+  LazyAdminPanelSkills: LazyComponent<typeof import("../../app/components/admin/PanelSkills.vue")['default']>
+  LazyAdminSection: LazyComponent<typeof import("../../app/components/admin/Section.vue")['default']>
+  LazySectionsContato: LazyComponent<typeof import("../../app/components/sections/Contato.vue")['default']>
+  LazySectionsExperiencia: LazyComponent<typeof import("../../app/components/sections/Experiencia.vue")['default']>
+  LazySectionsHero: LazyComponent<typeof import("../../app/components/sections/Hero.vue")['default']>
+  LazySectionsProjetos: LazyComponent<typeof import("../../app/components/sections/Projetos.vue")['default']>
+  LazySectionsSkills: LazyComponent<typeof import("../../app/components/sections/Skills.vue")['default']>
+  LazySectionsSobre: LazyComponent<typeof import("../../app/components/sections/Sobre.vue")['default']>
   LazyNuxtWelcome: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
   LazyNuxtLayout: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
   LazyNuxtErrorBoundary: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>

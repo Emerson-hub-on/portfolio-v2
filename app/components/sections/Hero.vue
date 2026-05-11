@@ -23,7 +23,7 @@ const hero = await fetchHero()
         </p>
 
         <!-- Title -->
-        <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight mb-6 animate-fade-up opacity-0" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
+        <h1 class="font-display text-3xl md:text-7xl font-bold leading-tight mb-6 animate-fade-up opacity-0 text-white" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
           Sou
           <span class="text-transparent bg-clip-text" style="background-image: linear-gradient(135deg, #7c6aff, #00e5cc);">
             {{ hero?.title_highlight ?? 'Dev Frontend' }}

@@ -17,8 +17,11 @@ export type Database = {
       about: {
         Row: {
           id: string
+          intro_subtitle: string | null
+          intro_title: string | null
           paragraph1: string | null
           paragraph2: string | null
+          photo_shape: string | null
           photo_url: string | null
           stat_clients: string | null
           stat_coffee: string | null
@@ -30,8 +33,11 @@ export type Database = {
         }
         Insert: {
           id?: string
+          intro_subtitle?: string | null
+          intro_title?: string | null
           paragraph1?: string | null
           paragraph2?: string | null
+          photo_shape?: string | null
           photo_url?: string | null
           stat_clients?: string | null
           stat_coffee?: string | null
@@ -43,8 +49,11 @@ export type Database = {
         }
         Update: {
           id?: string
+          intro_subtitle?: string | null
+          intro_title?: string | null
           paragraph1?: string | null
           paragraph2?: string | null
+          photo_shape?: string | null
           photo_url?: string | null
           stat_clients?: string | null
           stat_coffee?: string | null

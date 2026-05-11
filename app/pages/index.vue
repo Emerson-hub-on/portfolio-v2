@@ -1,22 +1,24 @@
 <template>
-  <!-- Intro overlay -->
   <Transition name="intro">
     <div v-if="showIntro" class="intro-screen" :class="{ 'revealing': revealing }">
-      <!-- Background igual ao hero -->
       <div class="intro-bg">
         <div class="grid-overlay" />
         <div class="blob blob-purple" />
         <div class="blob blob-cyan" />
       </div>
 
-      <!-- Conteúdo central -->
       <div class="intro-content" :class="{ 'fade-out': revealing }">
-        <!-- Avatar placeholder -->
         <div class="avatar-wrapper">
           <div class="avatar-ring" />
           <div class="avatar-ring ring-2" />
           <div class="avatar">
-            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="avatar-icon">
+            <!-- Foto do banco se existir, senão SVG padrão -->
+            <img
+              v-if="about?.photo_url"
+              :src="about.photo_url"
+              class="w-full h-full object-cover"
+            />
+            <svg v-else viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="avatar-icon">
               <circle cx="40" cy="30" r="16" fill="#7c6aff" opacity="0.9"/>
               <ellipse cx="40" cy="68" rx="26" ry="16" fill="#7c6aff" opacity="0.6"/>
             </svg>
@@ -24,35 +26,31 @@
           <div class="avatar-glow" />
         </div>
 
-        <!-- Título -->
-        <p class="intro-role">Dev Frontend</p>
-        <p class="intro-sub">Vue · Nuxt · React</p>
+        <p class="intro-role">{{ about?.intro_title ?? 'Dev Frontend' }}</p>
+        <p class="intro-sub">{{ about?.intro_subtitle ?? 'Vue · Nuxt · React' }}</p>
 
-        <!-- Botão conhecer -->
         <button class="btn-conhecer" @click="startReveal">
           <span class="btn-text">Conhecer</span>
           <span class="btn-arrow">↓</span>
         </button>
       </div>
 
-      <!-- Círculo de expansão -->
       <div class="circle-expand" :class="{ 'active': revealing }" />
     </div>
   </Transition>
 
-  <!-- Conteúdo do portfólio -->
   <div v-if="!showIntro || revealing" class="portfolio-content" :class="{ 'visible': !showIntro }">
-    <SectionHero />
+    <SectionsHero />
     <div class="glow-line opacity-20" />
-    <SectionSobre />
+    <SectionsSobre />
     <div class="glow-line opacity-20" />
-    <SectionProjetos />
+    <SectionsProjetos />
     <div class="glow-line opacity-20" />
-    <SectionSkills />
+    <SectionsSkills />
     <div class="glow-line opacity-20" />
-    <SectionExperiencia />
+    <SectionsExperiencia />
     <div class="glow-line opacity-20" />
-    <SectionContato />
+    <SectionsContato />
   </div>
 </template>
 
@@ -61,6 +59,9 @@ useSeoMeta({
   title: 'Dev Frontend | Portfolio',
   description: 'Portfolio de desenvolvimento frontend — Vue, Nuxt, React e muito mais.',
 })
+
+const { fetchAbout } = usePortfolioData()
+const about = await fetchAbout()
 
 const showIntro = ref(true)
 const revealing = ref(false)
@@ -72,6 +73,8 @@ function startReveal() {
   }, 900)
 }
 </script>
+
+
 
 <style scoped>
 /* ── Intro Screen ── */
