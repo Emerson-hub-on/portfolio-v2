@@ -17,19 +17,15 @@
             <h3 class="font-display font-bold text-white">{{ category.name }}</h3>
           </div>
 
-          <div class="space-y-3">
-            <div v-for="skill in category.skills" :key="skill.name">
-              <div class="flex justify-between items-center mb-1.5">
-                <span class="text-gray-300 text-sm font-medium">{{ skill.name }}</span>
-                <span class="text-gray-500 text-xs font-mono">{{ skill.level }}%</span>
-              </div>
-              <div class="h-1.5 bg-dark-700 rounded-full overflow-hidden">
-                <div
-                  class="h-full rounded-full transition-all duration-1000"
-                  :style="`width: ${skill.level}%; background: linear-gradient(90deg, ${category.color}, ${category.color}99)`"
-                />
-              </div>
-            </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="skill in category.skills"
+              :key="skill"
+              class="px-3 py-1.5 rounded-lg text-sm font-medium text-gray-200 bg-dark-700 border"
+              :style="`border-color: ${category.color}40`"
+            >
+              {{ skill }}
+            </span>
           </div>
         </div>
       </div>

@@ -58,8 +58,8 @@
 import { intro, about } from '~/data/portfolio'
 
 useSeoMeta({
-  title: 'Dev Frontend | Portfolio',
-  description: 'Portfolio de desenvolvimento frontend — Vue, Nuxt, React e muito mais.',
+  title: 'Emerson Sousa | Desenvolvedor Full Stack',
+  description: 'Portfólio de Emerson Sousa, desenvolvedor full stack em Campina Grande - PB: sistemas comerciais, automação fiscal e aplicações web.',
 })
 
 const showIntro = ref(true)

@@ -71,6 +71,9 @@ module.exports = {
           '@apply font-mono text-sm tracking-widest uppercase': {},
           color: '#7c6aff',
         },
+        '.section-title': {
+          '@apply font-display text-3xl md:text-5xl font-bold leading-tight text-white': {},
+        },
         '.card-dark': {
           '@apply rounded-xl': {},
           backgroundColor: '#111118',

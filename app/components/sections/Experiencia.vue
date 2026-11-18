@@ -40,9 +40,9 @@
                   </span>
                 </div>
 
-                <p class="text-gray-400 text-sm leading-relaxed mb-4">{{ exp.description }}</p>
+                <p class="text-gray-400 text-sm leading-relaxed" :class="{ 'mb-4': exp.techs.length }">{{ exp.description }}</p>
 
-                <div class="flex flex-wrap gap-2">
+                <div v-if="exp.techs.length" class="flex flex-wrap gap-2">
                   <span
                     v-for="tech in exp.techs"
                     :key="tech"

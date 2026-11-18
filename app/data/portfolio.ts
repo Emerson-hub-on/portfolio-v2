@@ -1,24 +1,23 @@
 // Todo o conteúdo do portfólio fica aqui.
 // Para atualizar o site: edite este arquivo, faça commit e push — o Vercel publica sozinho.
-// Os textos abaixo são exemplos: troque pelos seus.
 
 // ── Tela de intro (botão "Conhecer") ──
 export const intro = {
-  title: 'Dev Frontend',
-  subtitle: 'Vue · Nuxt · React',
+  title: 'Emerson Sousa',
+  subtitle: 'Desenvolvedor Full Stack',
 }
 
 // ── Hero ──
 export const hero = {
-  welcomeTag: 'Olá, seja bem-vindo',
-  titleHighlight: 'Dev Frontend',
-  titleComplement: 'apaixonado por interfaces.',
+  welcomeTag: 'Olá, eu sou o Emerson Sousa',
+  titleHighlight: 'Desenvolvedor Full Stack',
+  titleComplement: 'do banco de dados à tela do usuário.',
   description:
-    'Crio aplicações web rápidas, acessíveis e bonitas com Vue, Nuxt e TypeScript — do protótipo ao deploy.',
+    'Sistemas comerciais, automação fiscal e aplicações web. Moro em Campina Grande - PB.',
   btnPrimary: 'Ver Projetos',
   btnSecondary: 'Falar comigo →',
-  statExperience: '3+',
-  statProjects: '20+',
+  statProjects: '20',
+  statProjectsLabel: 'projetos no GitHub',
 }
 
 // ── Sobre mim ──
@@ -26,16 +25,14 @@ export const about = {
   // Coloque sua foto em /public (ex.: public/foto.jpg) e use '/foto.jpg'. Deixe null para o placeholder.
   photoUrl: null as string | null,
   photoShape: 'round' as 'round' | 'square',
-  titleLine1: 'Código limpo,',
-  titleLine2: 'resultados reais.',
+  titleLine1: 'Sistemas intuitivos',
+  titleLine2: 'e funcionais.',
   paragraph1:
-    'Sou desenvolvedor frontend com foco em Vue e Nuxt. Gosto de transformar ideias em interfaces claras, com atenção a performance, acessibilidade e detalhes de UX.',
+    'Sou apaixonado por computação e tecnologia e estou sempre buscando aprimorar meus conhecimentos em desenvolvimento. Gosto de usar criatividade e inovação para construir sistemas intuitivos e funcionais, do banco de dados à tela do usuário.',
   paragraph2:
-    'Fora do código, estou sempre estudando algo novo — de design de interfaces a boas práticas de arquitetura — e compartilhando o que aprendo.',
+    'Desenvolvo o Cyberly Sistema, um PDV com emissão de NFC-e e NF-e, e o Cyberly Diet, um diário alimentar com inteligência artificial. Curso Análise e Desenvolvimento de Sistemas na Unifacisa, e estruturas de dados e algoritmos fazem parte do meu dia a dia.',
   stats: [
-    { value: '3+', label: 'Anos de experiência' },
-    { value: '20+', label: 'Projetos entregues' },
-    { value: '10+', label: 'Clientes satisfeitos' },
+    { value: '20', label: 'Projetos no GitHub' },
     { value: '∞', label: 'Café consumido' },
   ],
 }
@@ -51,105 +48,106 @@ export const projects: {
   githubUrl?: string
 }[] = [
   {
-    name: 'Dashboard Financeiro',
-    description: 'Painel com gráficos interativos para acompanhar receitas, despesas e metas mensais.',
-    emoji: '📊',
-    tags: ['Vue', 'TypeScript', 'Chart.js'],
-    demoUrl: 'https://exemplo.com',
-    githubUrl: 'https://github.com/seu-usuario/dashboard',
+    name: 'Cyberly Diet',
+    description:
+      'Diário alimentar com IA: fotografe o prato e a IA estima calorias e macronutrientes. Também registra peso, atividade física e água.',
+    emoji: '🥗',
+    tags: ['Laravel', 'IA', 'Supabase'],
+    demoUrl: 'https://cyberly-diet.vercel.app',
+    githubUrl: 'https://github.com/Emerson-hub-on/Cyberly-Diet',
   },
   {
-    name: 'App de Clima',
-    description: 'Previsão do tempo com geolocalização, busca por cidade e tema claro/escuro.',
-    emoji: '⛅',
-    tags: ['Nuxt', 'API REST', 'Tailwind'],
-    githubUrl: 'https://github.com/seu-usuario/clima',
+    name: 'Cyberly Sistema',
+    description:
+      'Sistema de PDV (frente de caixa) com emissão de NFC-e e NF-e, comandas para restaurantes, integração com o iFood e pedidos online.',
+    emoji: '🧾',
+    tags: ['Automação fiscal'],
   },
   {
-    name: 'Loja Virtual',
-    description: 'E-commerce com carrinho, filtros de produtos e checkout simulado.',
-    emoji: '🛒',
-    tags: ['Nuxt', 'Pinia', 'Tailwind'],
-    demoUrl: 'https://exemplo.com',
+    name: 'Delivery Express',
+    description:
+      'Plataforma de delivery multiloja: cardápio, painel da loja, PDV, acompanhamento de pedidos e área do motoboy.',
+    emoji: '🛵',
+    tags: ['Next.js', 'TypeScript', 'Supabase'],
+    githubUrl: 'https://github.com/Emerson-hub-on/delivery-express',
+  },
+  {
+    name: 'Trufa App',
+    description:
+      'Gestão de produção e vendas de trufas: sabores, ficha técnica, compras, vendas e relatórios em PDF e Excel.',
+    emoji: '🍫',
+    tags: ['Nuxt', 'Vue', 'Supabase'],
+    demoUrl: 'https://trufa-app.vercel.app',
+    githubUrl: 'https://github.com/Emerson-hub-on/trufa-app',
+  },
+  {
+    name: 'SEFAZ Proxy',
+    description:
+      'Proxy para os web services da SEFAZ, com autenticação por certificado digital A1 e acesso protegido por chave.',
+    emoji: '🔐',
+    tags: ['Node.js', 'Express', 'Automação fiscal'],
+    githubUrl: 'https://github.com/Emerson-hub-on/sefaz-proxy',
+  },
+  {
+    name: 'Galeria de Certificados',
+    description: 'Galeria dos meus certificados de cursos, feita com componentes React.',
+    emoji: '🏅',
+    tags: ['React', 'Tailwind'],
+    demoUrl: 'https://galeria-de-certificados.vercel.app',
+    githubUrl: 'https://github.com/Emerson-hub-on/galeria-de-certificados',
   },
 ]
 
 // ── Skills ──
 export const skillCategories = [
   {
-    name: 'Frontend Core',
+    name: 'Frontend',
     icon: '🎯',
     color: '#7c6aff',
-    skills: [
-      { name: 'Vue.js / Nuxt', level: 90 },
-      { name: 'React / Next.js', level: 75 },
-      { name: 'TypeScript', level: 80 },
-      { name: 'HTML & CSS', level: 95 },
-    ],
+    skills: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'Vue / Nuxt', 'React / Next.js', 'Tailwind CSS', 'Alpine.js'],
   },
   {
-    name: 'Estilo & Design',
-    icon: '🎨',
-    color: '#00e5cc',
-    skills: [
-      { name: 'Tailwind CSS', level: 90 },
-      { name: 'SASS / SCSS', level: 80 },
-      { name: 'Figma', level: 70 },
-      { name: 'CSS Animations', level: 75 },
-    ],
-  },
-  {
-    name: 'Ferramentas',
+    name: 'Backend & Dados',
     icon: '⚙️',
+    color: '#00e5cc',
+    skills: ['PHP', 'Laravel', 'Node.js', 'Express', 'MySQL', 'SQLite', 'Supabase'],
+  },
+  {
+    name: 'Outras linguagens',
+    icon: '🧠',
     color: '#ff6b6b',
-    skills: [
-      { name: 'Git / GitHub', level: 85 },
-      { name: 'Vite / Webpack', level: 75 },
-      { name: 'Jest / Vitest', level: 65 },
-      { name: 'Docker (básico)', level: 50 },
-    ],
+    skills: ['Java', 'Python', 'C', 'Estruturas de Dados'],
   },
 ]
 
 // "Também trabalho com"
 export const otherTechs = [
-  'Pinia', 'Vuex', 'GraphQL', 'REST API', 'Axios',
-  'GSAP', 'Framer Motion', 'Storybook', 'ESLint', 'Prettier',
-  'Vercel', 'Netlify', 'PWA', 'SEO', 'Web Vitals',
+  'Git', 'GitHub', 'Vite', 'Linux', 'Nginx', 'VS Code',
+  'Pinia', 'Chart.js', 'Mercado Pago', 'NFC-e / NF-e', 'Vercel',
 ]
 
 // ── Experiência (a primeira aparece destacada como atual) ──
-export const experiences = [
+export const experiences: {
+  role: string
+  company: string
+  period: string
+  description: string
+  techs: string[]
+}[] = [
   {
-    role: 'Frontend Developer',
-    company: 'Empresa Atual Ltda.',
-    period: '2023 – presente',
+    role: 'Suporte de TI',
+    company: 'Cupom Fiscal Sistemas',
+    period: 'Atual',
     description:
-      'Desenvolvimento de aplicações SPA e SSR em Vue 3 + Nuxt. Liderança técnica do frontend, definição de padrões de código, code review e mentoria júnior.',
-    techs: ['Vue 3', 'Nuxt', 'TypeScript', 'Tailwind', 'Pinia'],
-  },
-  {
-    role: 'Frontend Developer Jr.',
-    company: 'Agência Digital XYZ',
-    period: '2022 – 2023',
-    description:
-      'Criação de landing pages e sistemas web para clientes de e-commerce. Foco em performance, SEO e integração com APIs REST.',
-    techs: ['Vue 2', 'JavaScript', 'SASS', 'Webpack'],
-  },
-  {
-    role: 'Freelancer',
-    company: 'Projetos Próprios',
-    period: '2021 – 2022',
-    description:
-      'Desenvolvimento de sites institucionais e e-commerces para clientes locais. Primeiros projetos com Vue.js e Nuxt.',
-    techs: ['HTML', 'CSS', 'JavaScript', 'WordPress'],
+      'Suporte técnico aos clientes da empresa: atendimento, instalação e configuração dos sistemas e resolução de problemas.',
+    techs: [],
   },
 ]
 
 // ── Contato (deixe um link vazio '' para esconder a rede) ──
 export const contact = {
-  email: 'seuemail@exemplo.com',
-  githubUrl: 'https://github.com/seu-usuario',
-  linkedinUrl: 'https://linkedin.com/in/seu-usuario',
-  twitterUrl: '',
+  email: 'sousaemerson.bol@gmail.com',
+  githubUrl: 'https://github.com/Emerson-hub-on',
+  linkedinUrl: '',
+  instagramUrl: 'https://www.instagram.com/messon_souza',
 }

@@ -28,7 +28,7 @@ There are no tests, linter or formatter configured. Run `npx nuxi typecheck` to 
 
 **History:** an earlier version used Supabase plus an `/admin` CMS. That code is kept on the `admin-supabase` branch.
 
-**Styling:** The theme lives in `tailwind.config.js`: `dark-950…600` and `accent` colors, `font-display` (Syne), `font-body` (DM Sans) and `font-mono` (JetBrains Mono), and the component classes `.section-label`, `.card-dark` and `.glow-line`. Fonts load through `app.head` in `nuxt.config.ts`. Many components also use hard-coded hex values (`#7c6aff`, `#050508`, `#00e5cc`) in scoped CSS.
+**Styling:** The theme lives in `tailwind.config.js`: `dark-950…600` and `accent` colors, `font-display` (Syne), `font-body` (DM Sans) and `font-mono` (JetBrains Mono), and the component classes `.section-label`, `.section-title`, `.card-dark` and `.glow-line`. The dark page background comes from the root `div` in `app/layouts/default.vue` (`bg-dark-950 text-white`); sections without their own background rely on it. Fonts load through `app.head` in `nuxt.config.ts`. Many components also use hard-coded hex values (`#7c6aff`, `#050508`, `#00e5cc`) in scoped CSS.
 
 ## Gotchas (Nuxt 4 directory layout)
 

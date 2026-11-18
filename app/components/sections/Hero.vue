@@ -51,17 +51,10 @@ import { hero } from '~/data/portfolio'
       <!-- Floating badges -->
       <div class="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 flex-col gap-4 animate-float">
         <div class="card-dark px-5 py-4 flex items-center gap-3">
-          <span class="text-2xl">⚡</span>
-          <div>
-            <p class="font-display font-bold text-white text-lg">{{ hero.statExperience }}</p>
-            <p class="text-gray-500 text-xs font-mono">anos de experiência</p>
-          </div>
-        </div>
-        <div class="card-dark px-5 py-4 flex items-center gap-3">
           <span class="text-2xl">🚀</span>
           <div>
             <p class="font-display font-bold text-white text-lg">{{ hero.statProjects }}</p>
-            <p class="text-gray-500 text-xs font-mono">projetos entregues</p>
+            <p class="text-gray-500 text-xs font-mono">{{ hero.statProjectsLabel }}</p>
           </div>
         </div>
       </div>
