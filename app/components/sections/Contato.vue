@@ -6,7 +6,7 @@
         <h2 class="section-title mb-6">
           Tem um projeto em mente?
         </h2>
-        <p class="text-gray-400 text-lg leading-relaxed mb-12">
+        <p class="text-gray-600 text-lg leading-relaxed mb-12">
           Estou sempre aberto a novas oportunidades e projetos interessantes.
           Me manda uma mensagem — respondo em até 24h.
         </p>
@@ -33,7 +33,7 @@
             :key="social.name"
             :href="social.url"
             target="_blank"
-            class="group flex items-center gap-2 text-gray-500 hover:text-white transition-all duration-200"
+            class="group flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-all duration-200"
           >
             <span class="card-dark p-3 rounded-xl group-hover:border-accent/30 transition-all duration-200">
               <component :is="social.icon" class="w-5 h-5" />

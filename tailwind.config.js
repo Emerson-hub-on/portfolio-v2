@@ -72,7 +72,7 @@ module.exports = {
           color: '#7c6aff',
         },
         '.section-title': {
-          '@apply font-display text-3xl md:text-5xl font-bold leading-tight text-white': {},
+          '@apply font-display text-3xl md:text-5xl font-bold leading-tight text-gray-900': {},
         },
         '.card-dark': {
           '@apply rounded-xl': {},
