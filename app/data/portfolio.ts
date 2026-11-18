@@ -23,7 +23,7 @@ export const hero = {
 // ── Sobre mim ──
 export const about = {
   // Coloque sua foto em /public (ex.: public/foto.jpg) e use '/foto.jpg'. Deixe null para o placeholder.
-  photoUrl: null as string | null,
+  photoUrl: '/foto.png' as string | null,
   photoShape: 'round' as 'round' | 'square',
   titleLine1: 'Sistemas intuitivos',
   titleLine2: 'e funcionais.',
