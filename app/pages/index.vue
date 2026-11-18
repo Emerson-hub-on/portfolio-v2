@@ -14,8 +14,8 @@
           <div class="avatar">
             <!-- Foto do banco se existir, senão SVG padrão -->
             <img
-              v-if="about?.photo_url"
-              :src="about.photo_url"
+              v-if="about.photoUrl"
+              :src="about.photoUrl"
               class="w-full h-full object-cover"
             />
             <svg v-else viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="avatar-icon">
@@ -26,8 +26,8 @@
           <div class="avatar-glow" />
         </div>
 
-        <p class="intro-role">{{ about?.intro_title ?? 'Dev Frontend' }}</p>
-        <p class="intro-sub">{{ about?.intro_subtitle ?? 'Vue · Nuxt · React' }}</p>
+        <p class="intro-role">{{ intro.title }}</p>
+        <p class="intro-sub">{{ intro.subtitle }}</p>
 
         <button class="btn-conhecer" @click="startReveal">
           <span class="btn-text">Conhecer</span>
@@ -55,13 +55,12 @@
 </template>
 
 <script setup>
+import { intro, about } from '~/data/portfolio'
+
 useSeoMeta({
   title: 'Dev Frontend | Portfolio',
   description: 'Portfolio de desenvolvimento frontend — Vue, Nuxt, React e muito mais.',
 })
-
-const { fetchAbout } = usePortfolioData()
-const about = await fetchAbout()
 
 const showIntro = ref(true)
 const revealing = ref(false)

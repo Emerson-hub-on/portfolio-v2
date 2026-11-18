@@ -1,22 +1,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/supabase'],
-  supabase: {
-    types: './types/supabase.ts',
-    redirectOptions: {
-      login: '/admin/login',
-      callback: '/confirm',
-      exclude: ['/', '/admin/login'],
-    },
-    clientOptions: {
-      realtime: {
-        params: {
-          eventsPerSecond: -1,
-        },
-      },
-    },
-  },
+  modules: ['@nuxtjs/tailwindcss'],
   app: {
     head: {
       link: [

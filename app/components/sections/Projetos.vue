@@ -27,7 +27,7 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <article
           v-for="project in filteredProjects"
-          :key="project.id"
+          :key="project.name"
           class="group card-dark overflow-hidden hover:border-accent/30 transition-all duration-300 hover:-translate-y-1"
         >
           <!-- Thumbnail -->
@@ -36,11 +36,11 @@
               {{ project.emoji }}
             </div>
             <div class="absolute inset-0 bg-dark-950/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-              <a v-if="project.demo_url" :href="project.demo_url" target="_blank"
+              <a v-if="project.demoUrl" :href="project.demoUrl" target="_blank"
                 class="px-4 py-2 bg-accent text-white text-sm rounded-lg font-medium hover:bg-accent/80 transition-colors">
                 Ver Demo
               </a>
-              <a v-if="project.github_url" :href="project.github_url" target="_blank"
+              <a v-if="project.githubUrl" :href="project.githubUrl" target="_blank"
                 class="px-4 py-2 bg-dark-700 text-white text-sm rounded-lg font-medium hover:bg-dark-600 transition-colors">
                 GitHub
               </a>
@@ -65,8 +65,7 @@
 </template>
 
 <script setup>
-const { fetchProjects } = usePortfolioData()
-const projects = await fetchProjects() ?? []
+import { projects } from '~/data/portfolio'
 
 const activeTag = ref('Todos')
 

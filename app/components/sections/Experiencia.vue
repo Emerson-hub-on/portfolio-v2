@@ -61,30 +61,5 @@
 </template>
 
 <script setup>
-const experiences = [
-  {
-    role: 'Frontend Developer',
-    company: 'Empresa Atual Ltda.',
-    period: '2023 – presente',
-    description:
-      'Desenvolvimento de aplicações SPA e SSR em Vue 3 + Nuxt. Liderança técnica do frontend, definição de padrões de código, code review e mentoria júnior.',
-    techs: ['Vue 3', 'Nuxt', 'TypeScript', 'Tailwind', 'Pinia'],
-  },
-  {
-    role: 'Frontend Developer Jr.',
-    company: 'Agência Digital XYZ',
-    period: '2022 – 2023',
-    description:
-      'Criação de landing pages e sistemas web para clientes de e-commerce. Foco em performance, SEO e integração com APIs REST.',
-    techs: ['Vue 2', 'JavaScript', 'SASS', 'Webpack'],
-  },
-  {
-    role: 'Freelancer',
-    company: 'Projetos Próprios',
-    period: '2021 – 2022',
-    description:
-      'Desenvolvimento de sites institucionais e e-commerces para clientes locais. Primeiros projetos com Vue.js e Nuxt.',
-    techs: ['HTML', 'CSS', 'JavaScript', 'WordPress'],
-  },
-]
+import { experiences } from '~/data/portfolio'
 </script>

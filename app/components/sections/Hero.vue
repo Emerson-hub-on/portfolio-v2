@@ -1,6 +1,5 @@
 <script setup>
-const { fetchHero } = usePortfolioData()
-const hero = await fetchHero()
+import { hero } from '~/data/portfolio'
 </script>
 
 <template>
@@ -19,32 +18,32 @@ const hero = await fetchHero()
       <div class="max-w-3xl">
         <!-- Label -->
         <p class="section-label mb-6 animate-fade-in opacity-0" style="animation-delay: 0.1s; animation-fill-mode: forwards;">
-          {{ hero?.welcome_tag ?? 'Olá, seja bem-vindo' }}
+          {{ hero.welcomeTag }}
         </p>
 
         <!-- Title -->
         <h1 class="font-display text-3xl md:text-7xl font-bold leading-tight mb-6 animate-fade-up opacity-0 text-white" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
           Sou
           <span class="text-transparent bg-clip-text" style="background-image: linear-gradient(135deg, #7c6aff, #00e5cc);">
-            {{ hero?.title_highlight ?? 'Dev Frontend' }}
+            {{ hero.titleHighlight }}
           </span>
           <br />
-          {{ hero?.title_complement ?? 'apaixonado por interfaces.' }}
+          {{ hero.titleComplement }}
         </h1>
 
         <!-- Description -->
         <p class="text-gray-400 text-lg md:text-xl leading-relaxed max-w-xl mb-10 animate-fade-up opacity-0" style="animation-delay: 0.4s; animation-fill-mode: forwards;">
-          {{ hero?.description }}
+          {{ hero.description }}
         </p>
 
         <!-- CTAs -->
         <div class="flex flex-wrap gap-4 animate-fade-up opacity-0" style="animation-delay: 0.55s; animation-fill-mode: forwards;">
           <a href="#projetos" class="px-6 py-3 rounded-xl font-medium text-white transition-all duration-200 hover:scale-105 hover:shadow-lg"
             style="background: linear-gradient(135deg, #7c6aff, #5a4bcc); box-shadow: 0 4px 20px rgba(124, 106, 255, 0.3);">
-            {{ hero?.btn_primary ?? 'Ver Projetos' }}
+            {{ hero.btnPrimary }}
           </a>
           <a href="#contato" class="px-6 py-3 rounded-xl font-medium text-gray-300 border border-dark-600 hover:border-accent/50 hover:text-white transition-all duration-200">
-            {{ hero?.btn_secondary ?? 'Falar comigo →' }}
+            {{ hero.btnSecondary }}
           </a>
         </div>
       </div>
@@ -54,14 +53,14 @@ const hero = await fetchHero()
         <div class="card-dark px-5 py-4 flex items-center gap-3">
           <span class="text-2xl">⚡</span>
           <div>
-            <p class="font-display font-bold text-white text-lg">{{ hero?.stat_experience ?? '3+' }}</p>
+            <p class="font-display font-bold text-white text-lg">{{ hero.statExperience }}</p>
             <p class="text-gray-500 text-xs font-mono">anos de experiência</p>
           </div>
         </div>
         <div class="card-dark px-5 py-4 flex items-center gap-3">
           <span class="text-2xl">🚀</span>
           <div>
-            <p class="font-display font-bold text-white text-lg">{{ hero?.stat_projects ?? '20+' }}</p>
+            <p class="font-display font-bold text-white text-lg">{{ hero.statProjects }}</p>
             <p class="text-gray-500 text-xs font-mono">projetos entregues</p>
           </div>
         </div>

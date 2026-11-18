@@ -18,7 +18,7 @@
               class="relative w-full h-full border border-dark-600 overflow-hidden bg-dark-800 flex items-center justify-center"
               :class="isRound ? 'rounded-full' : 'rounded-2xl'"
             >
-              <img v-if="about?.photo_url" :src="about.photo_url" class="w-full h-full object-cover" />
+              <img v-if="about.photoUrl" :src="about.photoUrl" class="w-full h-full object-cover" />
               <div v-else class="flex flex-col items-center gap-3 text-gray-600">
                 <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -39,17 +39,17 @@
         <div class="order-1 md:order-2">
           <p class="section-label mb-4">Sobre mim</p>
           <h2 class="section-title mb-6">
-            {{ about?.title_line1 ?? 'Código limpo,' }}<br />
-            <span class="text-accent">{{ about?.title_line2 ?? 'resultados reais.' }}</span>
+            {{ about.titleLine1 }}<br />
+            <span class="text-accent">{{ about.titleLine2 }}</span>
           </h2>
 
           <div class="space-y-4 text-gray-800 leading-relaxed">
-            <p>{{ about?.paragraph1 }}</p>
-            <p>{{ about?.paragraph2 }}</p>
+            <p>{{ about.paragraph1 }}</p>
+            <p>{{ about.paragraph2 }}</p>
           </div>
 
           <div class="mt-8 grid grid-cols-2 gap-4">
-            <div v-for="fact in facts" :key="fact.label" class="card-dark p-4">
+            <div v-for="fact in about.stats" :key="fact.label" class="card-dark p-4">
               <p class="font-display font-bold text-2xl text-white mb-1">{{ fact.value }}</p>
               <p class="text-gray-500 text-sm">{{ fact.label }}</p>
             </div>
@@ -61,15 +61,7 @@
 </template>
 
 <script setup>
-const { fetchAbout } = usePortfolioData()
-const about = await fetchAbout()
+import { about } from '~/data/portfolio'
 
-const isRound = computed(() => about?.photo_shape === 'round')
-
-const facts = computed(() => [
-  { value: about?.stat_experience ?? '3+', label: 'Anos de experiência' },
-  { value: about?.stat_projects   ?? '20+', label: 'Projetos entregues' },
-  { value: about?.stat_clients    ?? '10+', label: 'Clientes satisfeitos' },
-  { value: about?.stat_coffee     ?? '∞',   label: 'Café consumido' },
-])
+const isRound = about.photoShape === 'round'
 </script>

@@ -52,45 +52,5 @@
 </template>
 
 <script setup>
-const skillCategories = [
-  {
-    name: 'Frontend Core',
-    icon: '🎯',
-    color: '#7c6aff',
-    skills: [
-      { name: 'Vue.js / Nuxt', level: 90 },
-      { name: 'React / Next.js', level: 75 },
-      { name: 'TypeScript', level: 80 },
-      { name: 'HTML & CSS', level: 95 },
-    ],
-  },
-  {
-    name: 'Estilo & Design',
-    icon: '🎨',
-    color: '#00e5cc',
-    skills: [
-      { name: 'Tailwind CSS', level: 90 },
-      { name: 'SASS / SCSS', level: 80 },
-      { name: 'Figma', level: 70 },
-      { name: 'CSS Animations', level: 75 },
-    ],
-  },
-  {
-    name: 'Ferramentas',
-    icon: '⚙️',
-    color: '#ff6b6b',
-    skills: [
-      { name: 'Git / GitHub', level: 85 },
-      { name: 'Vite / Webpack', level: 75 },
-      { name: 'Jest / Vitest', level: 65 },
-      { name: 'Docker (básico)', level: 50 },
-    ],
-  },
-]
-
-const otherTechs = [
-  'Pinia', 'Vuex', 'GraphQL', 'REST API', 'Axios',
-  'GSAP', 'Framer Motion', 'Storybook', 'ESLint', 'Prettier',
-  'Vercel', 'Netlify', 'PWA', 'SEO', 'Web Vitals',
-]
+import { skillCategories, otherTechs } from '~/data/portfolio'
 </script>
